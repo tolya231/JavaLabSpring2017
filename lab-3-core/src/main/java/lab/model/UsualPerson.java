@@ -1,7 +1,12 @@
 package lab.model;
 
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class UsualPerson implements Person {
@@ -94,18 +99,19 @@ public class UsualPerson implements Person {
     }
 
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         UsualPerson person = (UsualPerson) o;
 
-        if (age != person.age) return false;
-        if (Float.compare(person.height, height) != 0) return false;
-        if (isProgrammer != person.isProgrammer) return false;
-        if (country != null ? !country.equals(person.country) : person.country != null) return false;
-        if (name != null ? !name.equals(person.name) : person.name != null) return false;
-
-        return true;
+        return age == person.age && Float.compare(person.height, height) == 0
+            && isProgrammer == person.isProgrammer && (country != null ? country
+            .equals(person.country) : person.country == null) && (name != null ? name
+            .equals(person.name) : person.name == null);
     }
 
     public int hashCode() {
