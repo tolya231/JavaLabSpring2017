@@ -1,13 +1,10 @@
 package lab.mvc;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import lab.domain.User;
 import lab.mvc.form.bean.UserFormBean;
 import lab.service.UserService;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,52 +19,52 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/adduser.form")
 public class UserFormController {
-	
-	private static Log log = LogFactory.getLog(UserFormController.class);
-	
-	private UserService userService;
 
-	@ModelAttribute("userFormBean")
-	public UserFormBean getUserFormBean() {
+  private static Log log = LogFactory.getLog(UserFormController.class);
 
-		return new UserFormBean();
-	}
+  private UserService userService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String get() {
+  @ModelAttribute("userFormBean")
+  public UserFormBean getUserFormBean() {
 
-		return "adduserform";
-	}
+    return new UserFormBean();
+  }
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView processSubmit(@Valid UserFormBean userFormBean, Errors errors) {
-		
-		if (errors.hasErrors()) {
+  @RequestMapping(method = RequestMethod.GET)
+  public String get() {
 
-			log.info("Adduserform validation failed.");
-			return  new ModelAndView("adduserform");
-		} else {
-			
-			List<User> userList;
-			User user = new User();
-			user.setFirstName(userFormBean.getFirstName());
-			user.setLastName(userFormBean.getLastName());
+    return "adduserform";
+  }
 
-			log.info("Adding new "+ user +"");
-			
-			userService.saveUser(user);
-			userList = userService.loadAllUsers();
-			
-			ModelAndView mav = new ModelAndView("userlistview");
-			mav.addObject("userList", userList);
-			
-			return mav;
-		}
-	}	
-	
-	@Autowired
-	@Required
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+  @RequestMapping(method = RequestMethod.POST)
+  public ModelAndView processSubmit(@Valid UserFormBean userFormBean, Errors errors) {
+
+    if (errors.hasErrors()) {
+
+      log.info("Adduserform validation failed.");
+      return new ModelAndView("adduserform");
+    } else {
+
+      List<User> userList;
+      User user = new User();
+      user.setFirstName(userFormBean.getFirstName());
+      user.setLastName(userFormBean.getLastName());
+
+      log.info("Adding new " + user + "");
+
+      userService.saveUser(user);
+      userList = userService.loadAllUsers();
+
+      ModelAndView mav = new ModelAndView("userlistview");
+      mav.addObject("userList", userList);
+
+      return mav;
+    }
+  }
+
+  @Autowired
+  @Required
+  public void setUserService(UserService userService) {
+    this.userService = userService;
+  }
 }

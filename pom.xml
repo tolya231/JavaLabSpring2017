@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>labs</groupId>
-    <artifactId>labs-ready</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>labs</groupId>
+  <artifactId>labs-ready</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <dependencies>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
-    <modules>
-        <module>lab-3-core</module>
-        <module>lab-4-core</module>
-        <module>lab-5-aop</module>
-        <module>lab-6-jdbc</module>
-        <module>lab-7-orm</module>
-        <module>lab-8-tx</module>
-        <module>lab-9-mvc</module>
-        <module>lab-10-quartz</module>
-    </modules>
+  <modules>
+    <module>lab-3-core</module>
+    <module>lab-4-core</module>
+    <module>lab-5-aop</module>
+    <module>lab-6-jdbc</module>
+    <module>lab-7-orm</module>
+    <module>lab-8-tx</module>
+    <module>lab-9-mvc</module>
+    <module>lab-10-quartz</module>
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>
